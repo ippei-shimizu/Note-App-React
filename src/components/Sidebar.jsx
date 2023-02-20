@@ -1,7 +1,7 @@
 import React from "react";
 import "./Sidebar.css";
 
-const Sidebar = ({ onAddNote, notes }) => {
+const Sidebar = ({ onAddNote, notes, onDeleteNote }) => {
   return (
     <div className="app-sidebar">
       <div className="app-sidebar-header">
@@ -13,10 +13,15 @@ const Sidebar = ({ onAddNote, notes }) => {
           <div className="app-sidebar-note" key={note.id}>
             <div className="sidebar-note-title">
               <strong>{note.title}</strong>
-              <button>Delete</button>
+              <button onClick={() => onDeleteNote(note.id)}>Delete</button>
             </div>
             <p>{note.content}</p>
-            <small>{note.modDate}</small>
+            <small>
+              {new Date(note.modDate).toLocaleDateString("ja-JP", {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </small>
           </div>
         ))}
       </div>
